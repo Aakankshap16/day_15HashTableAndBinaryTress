@@ -3,6 +3,7 @@
     public class BinarySearchTree<T> where T : IComparable<T>
     {
         public T Data { get; set; }
+
         public BinarySearchTree<T> LeftTree { get; set; }
         public BinarySearchTree<T> RightTree { get; set; }
 
@@ -15,6 +16,8 @@
 
         int leftCount = 0;
         int rightCount = 0;
+        bool result = false;
+
 
         public void Add(T item)
         {
@@ -56,7 +59,35 @@
         //SIZE
         public void Size()
         {
-            Console.WriteLine("Size" + " " +(7 * (this.leftCount + this.rightCount) - 1));
+            Console.WriteLine("Size" + " " + (7 * (this.leftCount + this.rightCount) - 1));
+        }
+
+        //CHECK EXIST OR NOT (SEARCH)
+        public bool IfExists(T element, BinarySearchTree<T> node)
+        {
+            if (node == null)
+            {
+                return false;
+            }
+            if (node.Data.Equals(element))
+            {
+                Console.WriteLine("Found the element in BST" + " " + node.Data);
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Current element is {0} in BST", node.Data);
+            }
+            if (element.CompareTo(node.Data) < 0)
+            {
+                IfExists(element, node.LeftTree);
+            }
+            if (element.CompareTo(node.Data) > 0)
+            {
+                IfExists(element, node.RightTree);
+            }
+            return result;
+
         }
     }
 
